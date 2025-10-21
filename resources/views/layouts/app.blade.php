@@ -17,7 +17,17 @@
                     </a>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <a href="{{ route('forums.index') }}" class="hover:text-purple-200">Forums</a>
+                    @guest
+                        <a href="{{ route('login') }}" class="hover:text-purple-200">Login</a>
+                        <a href="{{ route('register') }}" class="hover:text-purple-200">Register</a>
+                    @else
+                        <span class="text-purple-200">Welcome, {{ Auth::user()->name }}!</span>
+                        <a href="{{ route('forums.index') }}" class="hover:text-purple-200">Forums</a>
+                        <form method="POST" action="{{ route('logout') }}" class="inline">
+                            @csrf
+                            <button type="submit" class="hover:text-purple-200 bg-transparent border-0 text-white cursor-pointer">Logout</button>
+                        </form>
+                    @endguest
                     <a href="{{ url('/konami') }}" class="text-xs opacity-30 hover:opacity-100" title="Secret Easter Egg">?</a>
                 </div>
             </div>
