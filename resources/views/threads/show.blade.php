@@ -28,7 +28,7 @@
             </div>
 
             <div class="flex justify-between items-center">
-                <h2 class="text-2xl font-bold text-gray-900">💬 Posts ({{ $posts->count() }})</h2>
+                <h2 class="text-2xl font-bold text-gray-900">💬 Posts ({{ $thread->posts->count() }})</h2>
                 <a href="{{ route('forums.threads.posts.create', [$forum, $thread]) }}"
                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                     + Add Reply
@@ -37,7 +37,7 @@
         </div>
 
         <div class="space-y-6">
-            @forelse($posts as $post)
+            @forelse($thread->posts as $post)
                 <div class="border border-gray-200 rounded-lg p-6 bg-gray-50">
                     <div class="flex justify-between items-start mb-4">
                         <div class="flex items-center space-x-3">

@@ -4,8 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'Laravel') }} - Anime & Gaming Forum</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-100 font-sans">
     <nav class="bg-purple-600 text-white shadow-lg">
@@ -21,7 +19,7 @@
                         <a href="{{ route('login') }}" class="hover:text-purple-200">Login</a>
                         <a href="{{ route('register') }}" class="hover:text-purple-200">Register</a>
                     @else
-                        <span class="text-purple-200">Welcome, {{ Auth::user()->name }}!</span>
+                        <span class="text-purple-200">Welcome, {{ auth()->user()->name }}!</span>
                         <a href="{{ route('forums.index') }}" class="hover:text-purple-200">Forums</a>
                         <form method="POST" action="{{ route('logout') }}" class="inline">
                             @csrf
@@ -44,6 +42,5 @@
         @yield('content')
     </main>
 
-    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

@@ -45,6 +45,21 @@
                 </div>
             </div>
 
+            <div class="flex justify-center space-x-4 mb-6">
+                @guest
+                    <a href="{{ route('login') }}"
+                       class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition duration-300">
+                        🔐 Login
+                    </a>
+                    <a href="{{ route('register') }}"
+                       class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition duration-300">
+                        📝 Register
+                    </a>
+                @else
+                    <span class="text-lg text-gray-700">Welcome back, {{ auth()->user()->name }}!</span>
+                @endguest
+            </div>
+
             <a href="{{ route('forums.index') }}"
                class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition duration-300">
                 🚀 Enter the Forum

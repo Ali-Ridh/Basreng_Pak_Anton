@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\ThreadController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\AttachmentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,9 +18,6 @@ Route::resource('forums.threads', ThreadController::class);
 // Nested posts routes
 Route::resource('forums.threads.posts', PostController::class);
 
-// Attachment routes
-Route::get('attachments/{attachment}/download', [AttachmentController::class, 'download'])->name('attachments.download');
-Route::get('attachments/{attachment}', [AttachmentController::class, 'show'])->name('attachments.show');
 
 // Hidden Easter egg route
 Route::get('/konami', function () {

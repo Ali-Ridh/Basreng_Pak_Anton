@@ -14,7 +14,7 @@ class PostController extends Controller
      */
     public function index(Forum $forum, Thread $thread)
     {
-        $posts = $thread->posts()->with('attachments')->get();
+        $posts = $thread->posts()->get();
         return view('posts.index', compact('forum', 'thread', 'posts'));
     }
 
@@ -33,29 +33,12 @@ class PostController extends Controller
     {
         $request->validate([
             'content' => 'required',
-            'attachments.*' => 'file|mimes:jpeg,png,jpg,gif,mp4,mov,avi|max:20480', // 20MB max
         ]);
 
         $post = new Post($request->only('content'));
         $post->thread_id = $thread->id;
         $post->user_id = auth()->id(); // Assuming authentication is set up
         $post->save();
-
-        // Handle file uploads
-        if ($request->hasFile('attachments')) {
-            foreach ($request->file('attachments') as $file) {
-                $filename = time() . '_' . $file->getClientOriginalName();
-                $path = $file->storeAs('attachments', $filename, 'public');
-
-                $post->attachments()->create([
-                    'filename' => $filename,
-                    'original_filename' => $file->getClientOriginalName(),
-                    'mime_type' => $file->getMimeType(),
-                    'path' => $path,
-                    'size' => $file->getSize(),
-                ]);
-            }
-        }
 
         return redirect()->route('forums.threads.posts.index', [$forum, $thread])
                         ->with('success','Post created successfully.');
@@ -66,7 +49,6 @@ class PostController extends Controller
      */
     public function show(Forum $forum, Thread $thread, Post $post)
     {
-        $post->load('attachments');
         return view('posts.show', compact('forum', 'thread', 'post'));
     }
 

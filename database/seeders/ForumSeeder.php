@@ -6,7 +6,6 @@ use App\Models\Forum;
 use App\Models\Thread;
 use App\Models\Post;
 use App\Models\User;
-use App\Models\Attachment;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -84,30 +83,5 @@ class ForumSeeder extends Seeder
             'content' => 'Marvel has better character development, but DC has more iconic villains. Tough call!'
         ]);
 
-        // Note: In a real application, you'd upload actual files and create attachment records
-        // For seeding, we'll create sample attachment records without actual files
-        $post1->attachments()->create([
-            'filename' => 'sample_anime_image.jpg',
-            'original_filename' => 'anime_wallpaper.jpg',
-            'mime_type' => 'image/jpeg',
-            'path' => 'attachments/sample_anime_image.jpg',
-            'size' => 1024000,
-        ]);
-
-        $post2->attachments()->create([
-            'filename' => 'sample_game_gif.gif',
-            'original_filename' => 'mario_animation.gif',
-            'mime_type' => 'image/gif',
-            'path' => 'attachments/sample_game_gif.gif',
-            'size' => 2048000,
-        ]);
-
-        $post3->attachments()->create([
-            'filename' => 'sample_video.mp4',
-            'original_filename' => 'marvel_trailer.mp4',
-            'mime_type' => 'video/mp4',
-            'path' => 'attachments/sample_video.mp4',
-            'size' => 10485760,
-        ]);
     }
 }
